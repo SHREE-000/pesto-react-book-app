@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import ThemeSwitcher from '../shared/ThemeSwitcher';
+import { useTheme } from '../contextAPI/ThemeContext';
 
 const BookForm = ({ setBooks }) => {
     const [book, setBook] = useState("");
     const [author, setAuthor] = useState("");
     const [year, setYear] = useState("");
-
+    const { theme } = useTheme();
     const addBook = (e) => {
         e.preventDefault();
         const obj = {
@@ -19,7 +21,8 @@ const BookForm = ({ setBooks }) => {
     };
 
   return (
-    <div className='p-5 border border-black'>
+    <div className={`${theme === "light" ? "bg-gray-100" : "bg-gray600"} p-5 border border-black`}>
+      <ThemeSwitcher />
       <h1 className='pt-5 py-5 text-lg font-bold'>Add a New Book</h1>
       <form onSubmit={addBook}>
         <label htmlFor="title">Book Title:</label>
